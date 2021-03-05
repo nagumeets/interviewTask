@@ -2,57 +2,72 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_home"
-    app:startDestination="@id/homeFragment">
+    android:id="@+id/nav_home"
+    app:startDestination="@id/destination_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/destination_home"
         android:name="com.example.interviewtask.ui.StockFragment"
         android:label="Home"
-        tools:layout="@layout/stockers_fragment" >
-    <action
-        android:id="@+id/action_home_to_details"
-        app:destination="@id/detailsFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        tools:layout="@layout/stockers_fragment">
+        <action
+            android:id="@+id/action_destination_home_to_destination_details"
+            app:destination="@id/destination_details" />
     </fragment>
     <fragment
-        android:id="@+id/detailsFragment"
+        android:id="@+id/destination_details"
         android:name="com.example.interviewtask.ui.StockersDetailsFragment"
         android:label="Details"
-        tools:layout="@layout/fragment_details" >
+        tools:layout="@layout/fragment_details">
         <argument
             android:name="profile_image"
-            app:argType="string"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="string" />
         <argument
             android:name="display_name"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="score"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="create_date"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="last_date"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="link"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="licence"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_destination_details_to_destination_home"
+            app:destination="@id/destination_home" />
     </fragment>
+    <!--<fragment
+        android:id="@+id/destination_profile"
+        android:name="com.example.interviewtask.ui.ProfileFragment"
+        android:label="Profile">
+        <action
+            android:id="@+id/action_destination_profile_to_destination_details"
+            app:destination="@id/destination_details"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/destination_details"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_destination_profile_to_destination_home"
+            app:destination="@id/destination_home"
+            app:popUpTo="@id/destination_home"
+            app:popUpToInclusive="true" />
+    </fragment>-->
 </navigation>

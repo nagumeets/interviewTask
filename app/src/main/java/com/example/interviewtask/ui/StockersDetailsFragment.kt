@@ -1,20 +1,17 @@
 package com.example.interviewtask.ui
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.interviewtask.databinding.FragmentDetailsBinding
-import androidx.navigation.NavArgs as NavArgs
 
 class StockersDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentDetailsBinding
+    private var _binding: FragmentDetailsBinding? = null
+    private val binding get() = _binding!!
     private val args: StockersDetailsFragmentArgs by navArgs()
     /*var displayName: String? = null
     private var score: Int? = null
@@ -36,15 +33,14 @@ class StockersDetailsFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
+            inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailsBinding.inflate(inflater)
+        // Inflate the layout for this fragment
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //initBindings()
@@ -55,6 +51,7 @@ class StockersDetailsFragment : Fragment() {
         Licence?.let { binding.licenceTxt.setText("Content Licence: ${Licence}") }
         Link?.let { binding.linkTxt.setText("Referal Link: ${Link}") }
         score?.let { binding.scoreTxt.setText("Score: ${score}") }*/
+
         args.profileImage?.let { binding.profileImage.loadImage(args.profileImage) }
         args.displayName?.let { binding.displayName.setText("User Name: ${args.displayName}") }
         args.createDate?.let { binding.createDateTxt.setText("Creation Date: ${args.createDate}") }
@@ -62,5 +59,10 @@ class StockersDetailsFragment : Fragment() {
         args.licence?.let { binding.licenceTxt.setText("Content Licence: ${args.licence}") }
         args.link?.let { binding.linkTxt.setText("Referal Link: ${args.link}") }
         args.score?.let { binding.scoreTxt.setText("Score: ${args.score}") }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

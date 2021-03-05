@@ -19,7 +19,7 @@ interface MyApi {
 
     companion object {
 
-        private const val BASE_URL = "https://api.stackexchange.com/2.2/"
+        private const val BASE_URL = "http://api.stackexchange.com/2.2/"
 
         operator fun invoke(): MyApi = Retrofit.Builder()
                 .baseUrl(BASE_URL)

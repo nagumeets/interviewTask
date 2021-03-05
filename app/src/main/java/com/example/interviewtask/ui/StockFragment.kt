@@ -1,12 +1,7 @@
 package com.example.interviewtask.ui
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
-import androidx.core.view.isGone
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -15,12 +10,14 @@ import com.example.interviewtask.data.MyApi
 import com.example.interviewtask.databinding.StockersFragmentBinding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
-import java.util.*
 
-class StockFragment : Fragment() {
+
+class StockFragment : Fragment()  {
 
     private lateinit var viewModel: StockersViewModel
     private lateinit var binding: StockersFragmentBinding
+    val stockersAdapter = StockAdapter()
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -33,23 +30,28 @@ class StockFragment : Fragment() {
         val factory = StockersViewModelFactory(MyApi())
         viewModel = ViewModelProvider(this, factory).get(StockersViewModel::class.java)
 
-        val stockersAdapter = StockAdapter()
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter = stockersAdapter.withLoadStateHeaderAndFooter(
-                header = StockersLoadStateAdapter { stockersAdapter.retry() },
-                footer = StockersLoadStateAdapter { stockersAdapter.retry() }
-        )
+        binding.apply {
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.setHasFixedSize(true)
+            recyclerView.adapter = stockersAdapter.withLoadStateHeaderAndFooter(
+                    header = StockersLoadStateAdapter { stockersAdapter.retry() },
+                    footer = StockersLoadStateAdapter { stockersAdapter.retry() })
+        }
+
         stockersAdapter.notifyDataSetChanged()
+
         lifecycleScope.launch {
             viewModel.stockers.collectLatest { pagedData ->
-                if(pagedData!=null) {
-                    stockersAdapter.submitData(pagedData)
-                }
-                else {
-                    Toast.makeText(context, "Server problem!", Toast.LENGTH_SHORT).show()
-                }
+                stockersAdapter.submitData(pagedData)
             }
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        binding==null
+    }
 }
+
+
+
