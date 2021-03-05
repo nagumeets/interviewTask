@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.interviewtask.data.models.StockOwnerItem
 import com.example.interviewtask.databinding.ItemStockersBinding
+import com.example.interviewtask.ui.fragment.StockFragmentDirections
 
 
 class StockAdapter :
@@ -49,7 +50,7 @@ class StockAdapter :
                         "licence" to item.content_license
                 )
                 //Navigation.findNavController(view).navigate(R.id.action_home_to_details, bundle)
-                 val action=StockFragmentDirections.actionDestinationHomeToDestinationDetails(
+                 val action= StockFragmentDirections.actionDestinationHomeToDestinationDetails(
                          item.owner.profile_image, item.owner.display_name, item.score, item.creation_date, item.last_activity_date, item.owner.link, item.content_license)
                  Navigation.findNavController(view).navigate(action)
             }

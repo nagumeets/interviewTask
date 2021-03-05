@@ -1,4 +1,4 @@
-package com.example.interviewtask.ui
+package com.example.interviewtask.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle

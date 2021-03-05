@@ -1,4 +1,4 @@
-package com.example.interviewtask.ui
+package com.example.interviewtask.ui.fragment
 
 import android.os.Bundle
 import android.view.*
@@ -8,6 +8,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.interviewtask.data.MyApi
 import com.example.interviewtask.databinding.StockersFragmentBinding
+import com.example.interviewtask.ui.StockAdapter
+import com.example.interviewtask.ui.StockersLoadStateAdapter
+import com.example.interviewtask.ui.StockersViewModel
+import com.example.interviewtask.ui.StockersViewModelFactory
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
 

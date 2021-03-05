@@ -7,6 +7,6 @@
 
     <fragment
         android:id="@+id/destination_profile"
-        android:name="com.example.interviewtask.ui.SettingsFragment"
+        android:name="com.example.interviewtask.ui.fragment.SettingsFragment"
         android:label="Profile"/>
 </navigation>
